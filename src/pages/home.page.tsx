@@ -1,4 +1,4 @@
-import { Box, Button, Link, Stack, Typography, useTheme } from "@mui/material";
+import { Button, Link, Stack, Typography, useTheme } from "@mui/material";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage.ts";

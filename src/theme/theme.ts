@@ -1,11 +1,12 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, Theme } from '@mui/material/styles';
 
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
+      light: '#9FEBAB',
       main: '#BAFF9A',
-      dark: '#9FEBAB',
+      dark: '#54a864',
     },
     secondary: {
       main: '#9abaff',
@@ -68,11 +69,11 @@ const lightTheme = createTheme({
           border: "1.5px solid black !important",
           boxShadow: '2px 2px black',
           '&:hover': {
-            backgroundColor: (theme) => theme.palette.primary.dark,
+            backgroundColor: (theme: Theme) => theme.palette.primary.light,
             boxShadow: '2px 2px black',
           },
           '&.MuiButton-containedSecondary:hover': {
-            backgroundColor: (theme) => theme.palette.secondary.dark,
+            backgroundColor: (theme: Theme) => theme.palette.primary.dark,
             boxShadow: '2px 2px black',
           },
           '&:active': {
@@ -97,7 +98,7 @@ const lightTheme = createTheme({
           fontWeight: 700,
           lineHeight: "28px",
           '&:hover': {
-            color: '#7FA6EE',
+            color: '#54a864',
           },
         },
       },

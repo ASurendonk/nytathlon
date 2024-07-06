@@ -22,8 +22,8 @@ const GamePage = () => {
   const [endTime, setEndTime] = useLocalStorage<number | null>("endTime", null);
   const [wordle, setWordle] = useLocalStorage<string>("wordle", "");
   const [connections, setConnections] = useLocalStorage<string>("connections", "");
-  const [mini, setMini] = useLocalStorage<string>("theMini", "");
-  const [boxed, setBoxed] = useLocalStorage<string>("letterBoxed", "");
+  const [mini, setMini] = useLocalStorage<MiniResult>("theMini", MiniResult.None);
+  const [boxed, setBoxed] = useLocalStorage<LetterBoxedResult>("letterBoxed", LetterBoxedResult.None);
 
   const [showResult, setShowResult] = useState(false);
 
@@ -118,20 +118,20 @@ const GamePage = () => {
   const onClickMini = useCallback((result: MiniResult) => () => {
     resumeGame();
     if (mini === result) {
-      setMini(undefined);
+      setMini(MiniResult.None);
     } else {
       setMini(result);
     }
-  }, [mini, resumeGame]);
+  }, [mini, resumeGame, setMini]);
 
   const onClickBoxed = useCallback((result: LetterBoxedResult) => () => {
     resumeGame();
     if (boxed === result) {
-      setBoxed(undefined);
+      setBoxed(LetterBoxedResult.None);
     } else {
       setBoxed(result);
     }
-  }, [boxed, resumeGame]);
+  }, [boxed, resumeGame, setBoxed]);
 
   const formatTimeResult = useCallback((time: number) => {
     const minutes = Math.floor(Math.abs(time) / 60);

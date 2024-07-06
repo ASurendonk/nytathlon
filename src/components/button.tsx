@@ -1,4 +1,4 @@
-import { Button as MUIButton } from "@mui/material";
+import { Button as MUIButton, useTheme } from "@mui/material";
 
 interface ButtonProps {
   label: string;
@@ -7,10 +7,19 @@ interface ButtonProps {
 }
 
 const Button = ({ label, selected, onClick }: ButtonProps) => {
+  const theme = useTheme();
+
   return (
     <MUIButton
-      variant="contained" color={selected ? "secondary" : "primary"  as "primary" | "secondary"}
-      sx={{ flex: 1 }}
+      variant="contained"
+      color="primary"
+      sx={{
+        flex: 1,
+        backgroundColor: selected ? theme.palette.primary.dark : theme.palette.primary.main,
+        '&:hover': {
+          backgroundColor: selected ? theme.palette.primary.dark : theme.palette.primary.light,
+        },
+      }}
       onClick={onClick}
     >
       {label}
