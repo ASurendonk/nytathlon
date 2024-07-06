@@ -13,6 +13,8 @@ const HomePage = () => {
   const [, setEndTime] = useLocalStorage<number | null>("endTime", null);
   const [, setWordle] = useLocalStorage<string>("wordle", "");
   const [, setConnections] = useLocalStorage<string>("connections", "");
+  const [, setMini] = useLocalStorage<string>("theMini", "");
+  const [, setBoxed] = useLocalStorage<string>("letterBoxed", "");
 
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
@@ -27,7 +29,9 @@ const HomePage = () => {
     setEndTime(null);
     setWordle("");
     setConnections("");
-  }, [setStartTime, setEndTime, setWordle, setConnections]);
+    setMini("");
+    setBoxed("");
+  }, [setStartTime, setEndTime, setWordle, setConnections, setMini, setBoxed]);
 
   const hasActiveGame = useMemo(() => !!startTime, [startTime]);
 

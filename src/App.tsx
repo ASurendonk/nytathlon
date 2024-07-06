@@ -1,6 +1,8 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Router from "./router/router.tsx";
 import { GameProvider } from "./context/gameContext.tsx";
-import { CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme, lightTheme } from "./theme/theme.ts";
 import { useThemeSelection } from "./context/themeContext.tsx";
 import { useMemo } from "react";
@@ -18,6 +20,7 @@ function App() {
       <GameProvider>
         <Router />
       </GameProvider>
+      <ToastContainer position="bottom-right" />
     </ThemeProvider>
   )
 }

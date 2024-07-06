@@ -8,10 +8,14 @@ const lightTheme = createTheme({
       dark: '#9FEBAB',
     },
     secondary: {
-      main: '#FFFFFF',
+      main: '#9abaff',
+      dark: '#7FA6EE'
     },
     error: {
       main: '#FB0E0E',
+    },
+    success: {
+      main: '#1EA008',
     },
     background: {
       default: '#EFFBE6',
@@ -61,10 +65,14 @@ const lightTheme = createTheme({
           fontSize: 20,
           lineHeight: "normal",
           padding: '8px 16px',
-          border: "1px solid black !important",
+          border: "1.5px solid black !important",
           boxShadow: '2px 2px black',
           '&:hover': {
-            backgroundColor: '#9FEBAB',
+            backgroundColor: (theme) => theme.palette.primary.dark,
+            boxShadow: '2px 2px black',
+          },
+          '&.MuiButton-containedSecondary:hover': {
+            backgroundColor: (theme) => theme.palette.secondary.dark,
             boxShadow: '2px 2px black',
           },
           '&:active': {
@@ -84,6 +92,21 @@ const lightTheme = createTheme({
         root: {
           color: 'black',
           textDecorationColor: 'black',
+          fontFamily: '"Zilla Slab", "Helvetica", "Arial", sans-serif',
+          fontSize: '24px',
+          fontWeight: 700,
+          lineHeight: "28px",
+          '&:hover': {
+            color: '#7FA6EE',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          borderRadius: 6,
         },
       },
     },

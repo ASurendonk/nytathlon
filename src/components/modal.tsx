@@ -42,7 +42,7 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
           sx={{ position: 'absolute', top: 8, right: 8 }}
           onClick={handleClose}
         >
-          <CloseIcon />
+          <CloseIcon sx={{ color: theme.palette.common.black }} />
         </IconButton>
         {children}
       </Box>

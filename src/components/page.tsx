@@ -19,13 +19,13 @@ const Page: React.FC<PageProps> = ({ children }) => {
         color: theme.palette.text.primary,
       }}
     >
-      <AppBar position="static" color="secondary" elevation={0} sx={{ borderBottom: 1, borderColor: theme.palette.common.black }}>
+      <AppBar position="static" elevation={0} sx={{ borderBottom: 1, borderColor: theme.palette.common.black, backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: "center" }}>
           <img src={Logo} alt="logo" height={40} style={{ maxWidth: "100%" }} />
         </Toolbar>
       </AppBar>
 
-      <Container component="main" sx={{ flex: 1, mt: 3, maxWidth: "600px !important" }}>
+      <Container component="main" sx={{ flex: 1, px: 2.5, mt: 3, maxWidth: "600px !important" }}>
         {children}
       </Container>
     </Box>
