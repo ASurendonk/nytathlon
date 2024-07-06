@@ -1,10 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { IconButton, InputAdornment, Link, Stack, TextField, Typography, useTheme } from "@mui/material";
+import {
+  Box, Button,
+  IconButton,
+  InputAdornment,
+  Link,
+  Stack,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from "@mui/material";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Clear } from "@mui/icons-material";
 
 const GamePage = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width:600px)');
+
   const [playing, setPlaying] = useState(true);
   const [startTime, setStartTime] = useLocalStorage<number | null>("startTime", null);
   const [endTime, setEndTime] = useLocalStorage<number | null>("endTime", null);
@@ -169,6 +181,20 @@ const GamePage = () => {
           }}
         />
         <Typography variant="h6" color={theme.palette.text.secondary}>CONNECTIONS SCORE: {connectionsScore}</Typography>
+      </Stack>
+
+      <Stack width="100%" gap={1}>
+        <Typography variant="h5" component="div" sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 1 }}>
+          <Link href="https://www.nytimes.com/puzzles/letter-boxed" target="_blank">
+            Letter Boxed
+          </Link>
+        </Typography>
+        <Box display="flex" sx={{ flexDirection: isMobile ? "column" : "row" }} gap={1}>
+          <Button variant="contained" sx={{ flex: 1 }}>Fewer Guesses</Button>
+          <Button variant="contained" sx={{ flex: 1 }}>On Par</Button>
+          <Button variant="contained" sx={{ flex: 1 }}>Failed</Button>
+        </Box>
+        <Typography variant="h6" color={theme.palette.text.secondary}>LETTER-BOXED SCORE: {connectionsScore}</Typography>
       </Stack>
 
       {!playing && (

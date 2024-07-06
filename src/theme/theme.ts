@@ -4,13 +4,17 @@ const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#0F5257',
+      main: '#BAFF9A',
+      dark: '#9FEBAB',
     },
     secondary: {
-      main: '#0B3142',
+      main: '#FFFFFF',
+    },
+    error: {
+      main: '#FB0E0E',
     },
     background: {
-      default: '#ffffff',
+      default: '#EFFBE6',
       paper: '#f5f5f5',
     },
     text: {
@@ -20,22 +24,68 @@ const lightTheme = createTheme({
     divider: '#e0e0e0',
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Chivo", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontSize: '2.5rem',
-      fontWeight: 500,
+      fontFamily: '"Zilla Slab", "Helvetica", "Arial", sans-serif',
+      fontSize: '32px',
+      fontWeight: 700,
     },
     h2: {
-      fontSize: '2rem',
-      fontWeight: 500,
+      fontFamily: '"Zilla Slab", "Helvetica", "Arial", sans-serif',
+      fontSize: '24px',
+      fontWeight: 700,
+      lineHeight: '28px',
     },
     body1: {
-      fontSize: '1rem',
+      fontSize: '18px',
+      lineHeight: '23px',
       fontWeight: 400,
     },
     body2: {
-      fontSize: '0.875rem',
+      fontSize: '16px',
       fontWeight: 400,
+    },
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: 6,
+        },
+        contained: {
+          fontFamily: '"Zilla Slab", "Helvetica", "Arial", sans-serif',
+          fontWeight: 700,
+          fontSize: 20,
+          lineHeight: "normal",
+          padding: '8px 16px',
+          border: "1px solid black !important",
+          boxShadow: '2px 2px black',
+          '&:hover': {
+            backgroundColor: '#9FEBAB',
+            boxShadow: '2px 2px black',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+        },
+        sizeSmall: {
+          padding: '4px 8px',
+        },
+        sizeLarge: {
+          padding: '12px 24px',
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: 'black',
+          textDecorationColor: 'black',
+        },
+      },
     },
   },
 });
