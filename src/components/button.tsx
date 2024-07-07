@@ -16,9 +16,12 @@ const Button = ({ label, selected, onClick }: ButtonProps) => {
       sx={{
         flex: 1,
         backgroundColor: selected ? theme.palette.primary.dark : theme.palette.primary.main,
+        textDecoration: selected ? "underline" : "inherit",
         '&:hover': {
           backgroundColor: selected ? theme.palette.primary.dark : theme.palette.primary.light,
+          textDecoration: selected ? "underline" : "inherit",
         },
+        whiteSpace: "nowrap",
       }}
       onClick={onClick}
     >

@@ -1,6 +1,8 @@
-import { AppBar, Box, Container, Toolbar } from "@mui/material";
+import { AppBar, Box, ButtonBase, Container, Toolbar } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import Logo from "../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 interface PageProps {
   children: React.ReactNode;
@@ -8,6 +10,11 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ children }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const onClickLogo = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
 
   return (
     <Box
@@ -21,11 +28,13 @@ const Page: React.FC<PageProps> = ({ children }) => {
     >
       <AppBar position="static" elevation={0} sx={{ borderBottom: 1, borderColor: theme.palette.common.black, backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: "center" }}>
-          <img src={Logo} alt="logo" height={40} style={{ maxWidth: "100%" }} />
+          <ButtonBase sx={{ p: 1, m: -1 }} onClick={onClickLogo}>
+            <img src={Logo} alt="logo" height={40} style={{maxWidth: "100%"}}/>
+          </ButtonBase>
         </Toolbar>
       </AppBar>
 
-      <Container component="main" sx={{ flex: 1, px: 2.5, mt: 3, maxWidth: "600px !important" }}>
+      <Container component="main" sx={{ flex: 1, px: 2.5, my: 3, maxWidth: "600px !important" }}>
         {children}
       </Container>
     </Box>

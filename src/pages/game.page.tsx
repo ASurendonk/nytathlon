@@ -7,11 +7,7 @@ import Button from "../components/button.tsx";
 import Input from "../components/input.tsx";
 import Modal from "../components/modal.tsx";
 import { toast } from "react-toastify";
-
-const WORDLE_SCORE_FACTOR = 10;
-const CONNECTIONS_SCORE_FACTOR = 60;
-const MINI_SCORE_FACTOR = 120
-const LETTER_BOXED_SCORE_FACTOR = 60;
+import * as GameHelper from "../helpers/game.helper.ts";
 
 const GamePage = () => {
   const theme = useTheme();
@@ -84,19 +80,19 @@ const GamePage = () => {
   }, [wordle, connections, mini, boxed, endTime, setEndTime, startTime, createInterval]);
 
   const wordleScore = useMemo(() => {
-    return calculateWordleScore(wordle);
+    return GameHelper.calculateWordleScore(wordle);
   }, [wordle]);
 
   const connectionsScore = useMemo(() => {
-    return calculateConnectionsScore(connections);
+    return GameHelper.calculateConnectionsScore(connections);
   }, [connections]);
 
   const miniScore = useMemo(() => {
-    return calculateMiniScore(mini);
+    return GameHelper.calculateMiniScore(mini);
   }, [mini]);
 
   const boxedScore = useMemo(() => {
-    return calculateBoxedScore(boxed);
+    return GameHelper.calculateBoxedScore(boxed);
   }, [boxed]);
 
   const totalScore = useMemo(() => {
@@ -104,7 +100,7 @@ const GamePage = () => {
   }, [time, wordleScore, connectionsScore, miniScore, boxedScore]);
 
   const formattedTime = useMemo(() => {
-    return formatTime(time);
+    return GameHelper.formatTime(time);
   }, [time]);
 
   const resumeGame = useCallback(() => {
@@ -149,7 +145,7 @@ const GamePage = () => {
   }, [theme]);
 
   const onShareResult = useCallback(() => {
-    navigator.clipboard.writeText(`I got ${formatTime(totalScore)} in the NYTathlon`);
+    navigator.clipboard.writeText(`I got ${GameHelper.formatTime(totalScore)} in the NYTathlon`);
     toast.success("Result copied to clipboard");
   }, [totalScore]);
 
@@ -169,7 +165,13 @@ const GamePage = () => {
         </Typography>
         <Input
           value={wordle}
-          onChange={value => setWordle(value)}
+          onChange={value => {
+            if (!value.includes("Wordle")) {
+              setWordle("");
+              return;
+            }
+            setWordle(value);
+          }}
           placeholder="Paste your shared result from Wordle"
           disabled={!!wordle || !playing}
           onClearClick={() => {
@@ -187,7 +189,13 @@ const GamePage = () => {
         </Typography>
         <Input
           value={connections}
-          onChange={value => setConnections(value)}
+          onChange={value => {
+            if (!value.includes("Connections")) {
+              setConnections("");
+              return;
+            }
+            setConnections(value);
+          }}
           placeholder="Paste your shared result from Connections"
           disabled={!!connections || !playing}
           onClearClick={() => {
@@ -232,7 +240,7 @@ const GamePage = () => {
 
           <Box width={160} alignSelf="center" mt={-3}>
             <Typography variant="h1" color={theme.palette.common.black} fontSize={64}>
-              {formatTime(totalScore)}
+              {GameHelper.formatTime(totalScore)}
             </Typography>
           </Box>
 
@@ -253,72 +261,5 @@ const GamePage = () => {
     </Stack>
   );
 };
-
-function formatTime(time: number) {
-  const minutes = Math.floor(time / 60);
-  const remainingSeconds = time % 60;
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-}
-
-function calculateWordleScore(result: string) {
-  try {
-    const totalWordCount = parseInt(result.split(" ")[2].split("/")[0]);
-    if (totalWordCount === 0) {
-      return WORDLE_SCORE_FACTOR * 6;
-    }
-    const totalScore = ((6 - totalWordCount) * WORDLE_SCORE_FACTOR) + WORDLE_SCORE_FACTOR;
-    return -totalScore;
-  } catch (error) {
-    return 0;
-  }
-}
-
-function calculateConnectionsScore(result: string) {
-  const lines = result.trim().split("\n");
-  const colorRows = lines.slice(2);
-
-  function isFullCategory(row: string[]) {
-    const firstColor = row[0];
-    return row.every((color: string) => color === firstColor);
-  }
-
-  function splitEmojis(row: string) {
-    return [...row];
-  }
-
-  let score = 0;
-  for (const row of colorRows) {
-    const colors = splitEmojis(row.trim());
-    if (!isFullCategory(colors)) {
-      score += CONNECTIONS_SCORE_FACTOR;
-    }
-  }
-
-  return score;
-}
-
-function calculateMiniScore(result?: MiniResult) {
-  switch (result) {
-    case MiniResult.Finished:
-      return -MINI_SCORE_FACTOR;
-    case MiniResult.GaveUp:
-      return MINI_SCORE_FACTOR;
-    default:
-      return 0;
-  }
-}
-
-function calculateBoxedScore(result?: LetterBoxedResult) {
-  switch (result) {
-    case LetterBoxedResult.Fewer:
-      return -LETTER_BOXED_SCORE_FACTOR;
-    case LetterBoxedResult.OnPar:
-      return 0;
-    case LetterBoxedResult.More:
-      return LETTER_BOXED_SCORE_FACTOR;
-    default:
-      return 0;
-  }
-}
 
 export default GamePage;

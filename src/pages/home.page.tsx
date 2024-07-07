@@ -1,9 +1,10 @@
-import { Button, Link, Stack, Typography, useTheme } from "@mui/material";
+import { Link, Stack, Typography, useTheme } from "@mui/material";
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 import Modal from "../components/modal.tsx";
 import { List, ListItem } from "../components/list.tsx";
+import Button from "../components/button.tsx";
 
 const HomePage = () => {
   const theme = useTheme();
@@ -50,13 +51,13 @@ const HomePage = () => {
         </List>
       </Stack>
 
-      <Link onClick={handleOpen} sx={{ cursor: "pointer" }}>See penalties for each game</Link>
+      <Link onClick={handleOpen} sx={{ cursor: "pointer", fontFamily: "Chivo", fontWeight: 400, fontSize: 18 }}>See penalties for each game</Link>
 
       <Stack gap={2} flexDirection="row">
         {!!startTime && (
-          <Button variant="contained" onClick={onResetClick}>RESET TIME</Button>
+          <Button label="RESET TIME" onClick={onResetClick} />
         )}
-        <Button variant="contained" onClick={onStartClick}>{hasActiveGame ? "CONTINUE" : "NEW GAME"}</Button>
+        <Button label={hasActiveGame ? "CONTINUE" : "NEW GAME"} onClick={onStartClick} />
       </Stack>
 
       <Modal open={open} onClose={handleClose}>

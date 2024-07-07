@@ -6,7 +6,7 @@ const lightTheme = createTheme({
     primary: {
       light: '#9FEBAB',
       main: '#BAFF9A',
-      dark: '#54a864',
+      dark: '#70E167',
     },
     secondary: {
       main: '#9abaff',
@@ -98,7 +98,7 @@ const lightTheme = createTheme({
           fontWeight: 700,
           lineHeight: "28px",
           '&:hover': {
-            color: '#54a864',
+            color: '#70E167',
           },
         },
       },
