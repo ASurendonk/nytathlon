@@ -17,7 +17,7 @@ interface ListItemProps {
 }
 
 const ListItem = ({ children }: ListItemProps) => {
-  return (<Box textAlign="center">▪️ {children}</Box>);
+  return (<Box textAlign="center" mt={0.5}>▪️ {children}</Box>);
 }
 
 export { List, ListItem };

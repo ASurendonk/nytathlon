@@ -5,6 +5,8 @@ import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 import Modal from "../components/modal.tsx";
 import { List, ListItem } from "../components/list.tsx";
 import Button from "../components/button.tsx";
+import MiniResult from "../enums/miniResult.enum.ts";
+import LetterBoxedResult from "../enums/letterBoxedResult.enum.ts";
 
 const HomePage = () => {
   const theme = useTheme();
@@ -14,8 +16,8 @@ const HomePage = () => {
   const [, setEndTime] = useLocalStorage<number | null>("endTime", null);
   const [, setWordle] = useLocalStorage<string>("wordle", "");
   const [, setConnections] = useLocalStorage<string>("connections", "");
-  const [, setMini] = useLocalStorage<string>("theMini", "");
-  const [, setBoxed] = useLocalStorage<string>("letterBoxed", "");
+  const [, setMini] = useLocalStorage<string>("theMini", MiniResult.None);
+  const [, setBoxed] = useLocalStorage<string>("letterBoxed", LetterBoxedResult.None);
 
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
@@ -30,8 +32,8 @@ const HomePage = () => {
     setEndTime(null);
     setWordle("");
     setConnections("");
-    setMini("");
-    setBoxed("");
+    setMini(MiniResult.None);
+    setBoxed(LetterBoxedResult.None);
   }, [setStartTime, setEndTime, setWordle, setConnections, setMini, setBoxed]);
 
   const hasActiveGame = useMemo(() => !!startTime, [startTime]);
