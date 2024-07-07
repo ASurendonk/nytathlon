@@ -57,8 +57,11 @@ const GamePage = () => {
   }, [startTime, setStartTime]);
 
   useEffect(() => {
-    const values = [wordle, connections, mini, boxed];
-    if (values.every(v => v !== "" && v !== undefined)) {
+    const completed =  (
+      wordle !== "" && connections !== "" && mini !== MiniResult.None && boxed !== LetterBoxedResult.None
+    );
+
+    if (completed) {
       setPlaying(false);
       setShowResult(true);
       if (intervalRef.current !== undefined) {
