@@ -11,7 +11,7 @@ const List = ({ children }: ListProps) => {
 }
 
 interface ListItemProps {
-  children: string;
+  children: React.ReactNode | string;
 }
 
 const ListItem = ({ children }: ListItemProps) => {

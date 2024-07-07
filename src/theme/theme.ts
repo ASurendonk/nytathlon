@@ -98,7 +98,7 @@ const lightTheme = createTheme({
           fontWeight: 700,
           lineHeight: "28px",
           '&:hover': {
-            color: '#70E167',
+            color: '#199D0F',
           },
         },
       },

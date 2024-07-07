@@ -46,8 +46,9 @@ const HomePage = () => {
         <Typography variant="h2" textAlign="center">The Rules</Typography>
         <List>
           <ListItem>Play the four games in whatever order you want</ListItem>
-          <ListItem>Start the timer when you start your first game</ListItem>
-          <ListItem>You are allowed to fail games</ListItem>
+          <ListItem>Timer starts when you click "New Game"</ListItem>
+          <ListItem>You are allowed to fail games (with penalties)</ListItem>
+          <ListItem>No checking on <b>The Mini!</b></ListItem>
         </List>
       </Stack>
 
@@ -67,12 +68,12 @@ const HomePage = () => {
               Wordle
             </Typography>
             <List>
-              <ListItem>Fail +1 min</ListItem>
+              <ListItem>Fail +3 min</ListItem>
               <ListItem>in 5 guesses -20s</ListItem>
-              <ListItem>in 4 guesses -30s</ListItem>
-              <ListItem>in 3 guesses -40s</ListItem>
-              <ListItem>in 2 guesses -50s</ListItem>
-              <ListItem>in 1 guesses -60s</ListItem>
+              <ListItem>in 4 guesses -40s</ListItem>
+              <ListItem>in 3 guesses -1 min</ListItem>
+              <ListItem>in 2 guesses -2 min</ListItem>
+              <ListItem>in 1 guesses -3 min</ListItem>
             </List>
           </Stack>
 
@@ -81,7 +82,7 @@ const HomePage = () => {
               Connections
             </Typography>
             <List>
-              <ListItem>Each missing category +1 min</ListItem>
+              <ListItem>Each missing category +2 min</ListItem>
             </List>
           </Stack>
 
@@ -90,7 +91,7 @@ const HomePage = () => {
               The Mini
             </Typography>
             <List>
-              <ListItem>Give up/DNG +2 min</ListItem>
+              <ListItem>Give up/DNG +5 min</ListItem>
             </List>
           </Stack>
 
@@ -99,8 +100,8 @@ const HomePage = () => {
               Letter Boxed
             </Typography>
             <List>
-              <ListItem>Win under the recommended amount -1 min</ListItem>
-              <ListItem>Win over the recommended amount +1 min</ListItem>
+              <ListItem>Win under the recommended amount -2 min</ListItem>
+              <ListItem>Win over the recommended amount +2 min</ListItem>
             </List>
           </Stack>
         </Stack>

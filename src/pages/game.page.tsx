@@ -96,7 +96,7 @@ const GamePage = () => {
   }, [boxed]);
 
   const totalScore = useMemo(() => {
-    return time + wordleScore + connectionsScore + miniScore + boxedScore;
+    return time + (wordleScore || 0) + connectionsScore + miniScore + boxedScore;
   }, [time, wordleScore, connectionsScore, miniScore, boxedScore]);
 
   const formattedTime = useMemo(() => {
@@ -129,7 +129,10 @@ const GamePage = () => {
     }
   }, [boxed, resumeGame, setBoxed]);
 
-  const formatTimeResult = useCallback((time: number) => {
+  const formatTimeResult = useCallback((time: number | undefined) => {
+    if (!time) {
+      return "0:00";
+    }
     const minutes = Math.floor(Math.abs(time) / 60);
     const remainingSeconds = Math.abs(time) % 60;
     const formattedTime = `${time < 0 ? '-' : time > 0 ? '+' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;

@@ -1,10 +1,9 @@
 import MiniResult from "../enums/miniResult.enum.ts";
 import LetterBoxedResult from "../enums/letterBoxedResult.enum.ts";
 
-const WORDLE_SCORE_FACTOR = 10;
-const CONNECTIONS_SCORE_FACTOR = 60;
-const MINI_SCORE_FACTOR = 120
-const LETTER_BOXED_SCORE_FACTOR = 60;
+const CONNECTIONS_SCORE_FACTOR = 120;
+const MINI_SCORE_FACTOR = 300;
+const LETTER_BOXED_SCORE_FACTOR = 120;
 
 function formatTime(time: number) {
   const minutes = Math.floor(time / 60);
@@ -19,14 +18,17 @@ function calculateWordleScore(result: string) {
 
   try {
     const totalWordCount = parseInt(result.split(" ")[2].split("/")[0]);
-    if (isNaN(totalWordCount)) {
-      return 0;
+    if (isNaN(totalWordCount) || totalWordCount === 0) {
+      return 180;
     }
-    if (totalWordCount === 0) {
-      return WORDLE_SCORE_FACTOR * 6;
+    switch (totalWordCount) {
+      case 6: return 180;
+      case 5: return -20;
+      case 4: return -40;
+      case 3: return -60;
+      case 2: return -120;
+      case 1: return -180;
     }
-    const totalScore = ((6 - totalWordCount) * WORDLE_SCORE_FACTOR) + WORDLE_SCORE_FACTOR;
-    return -totalScore;
   } catch (error) {
     return 0;
   }
@@ -63,7 +65,7 @@ function calculateConnectionsScore(result: string) {
 function calculateMiniScore(result?: MiniResult) {
   switch (result) {
     case MiniResult.Finished:
-      return -MINI_SCORE_FACTOR;
+      return 0;
     case MiniResult.GaveUp:
       return MINI_SCORE_FACTOR;
     default:
