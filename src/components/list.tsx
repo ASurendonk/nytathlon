@@ -1,12 +1,14 @@
+import { Box } from "@mui/material";
+
 interface ListProps {
   children: React.ReactNode;
 }
 
 const List = ({ children }: ListProps) => {
   return (
-    <ul style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: 0, fontSize: '18px', lineHeight: '28px' }}>
+    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: 0, fontSize: '18px', lineHeight: '28px' }}>
       {children}
-    </ul>
+    </Box>
   );
 }
 
@@ -15,7 +17,7 @@ interface ListItemProps {
 }
 
 const ListItem = ({ children }: ListItemProps) => {
-  return (<li>{children}</li>);
+  return (<Box textAlign="center">▪️ {children}</Box>);
 }
 
 export { List, ListItem };
