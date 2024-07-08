@@ -5,7 +5,7 @@ import GamePage from "../pages/game.page.tsx";
 
 const Router = () => {
   return (
-    <BrowserRouter basename="/nytathalon">
+    <BrowserRouter basename="/nytathlon">
       <Routes>
         <Route path="/" element={<Page><HomePage /></Page>} />
         <Route path="/game" element={<Page><GamePage /></Page>} />

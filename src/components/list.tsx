@@ -1,12 +1,14 @@
 import { Box } from "@mui/material";
 
+const SPACING = 12;
+
 interface ListProps {
   children: React.ReactNode;
 }
 
 const List = ({ children }: ListProps) => {
   return (
-    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: 0, fontSize: '18px', lineHeight: '28px' }}>
+    <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: 0, marginTop: -SPACING, fontSize: '18px', lineHeight: '28px' }}>
       {children}
     </Box>
   );
@@ -17,7 +19,7 @@ interface ListItemProps {
 }
 
 const ListItem = ({ children }: ListItemProps) => {
-  return (<Box textAlign="center" mt={0.5}>▪️ {children}</Box>);
+  return (<Box textAlign="center" mt={`${SPACING}px`} lineHeight="normal">▪️ {children}</Box>);
 }
 
 export { List, ListItem };

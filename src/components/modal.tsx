@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
-import { Modal as MUIModal, Box, IconButton, useMediaQuery } from '@mui/material';
+import { Modal as MUIModal, Box, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
+import { useIsMobile } from "../hooks/useIsMobile.ts";
 
 interface ModalProps {
   open: boolean;
@@ -11,7 +12,7 @@ interface ModalProps {
 
 const Modal = ({ open, onClose, children }: ModalProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
 
   const handleClose = useCallback(() => {
     onClose();
