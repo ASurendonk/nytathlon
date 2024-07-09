@@ -22,7 +22,7 @@ function calculateWordleScore(result: string) {
       return 180;
     }
     switch (totalWordCount) {
-      case 6: return 180;
+      case 6: return 0;
       case 5: return -20;
       case 4: return -40;
       case 3: return -60;
@@ -32,6 +32,8 @@ function calculateWordleScore(result: string) {
   } catch (error) {
     return 0;
   }
+
+  return 0;
 }
 
 function calculateConnectionsScore(result: string) {
@@ -52,24 +54,25 @@ function calculateConnectionsScore(result: string) {
   }
 
   let correctRows = 0;
+  let incorrectRows = 0;
   for (const row of colorRows) {
     const colors = splitEmojis(row.trim());
     if (isFullCategory(colors)) {
       correctRows++;
+    } else {
+      incorrectRows++;
     }
   }
 
-  return (4 - correctRows) * CONNECTIONS_SCORE_FACTOR;
-}
+  if (correctRows < 4) {
+    return (4 - correctRows) * CONNECTIONS_SCORE_FACTOR;
+  }
 
-function calculateMiniScore(result?: MiniResult) {
-  switch (result) {
-    case MiniResult.Finished:
-      return 0;
-    case MiniResult.GaveUp:
-      return MINI_SCORE_FACTOR;
-    default:
-      return 0;
+  switch(incorrectRows) {
+    case 2: return -60;
+    case 1: return -90;
+    case 0: return -120;
+    default: return 0;
   }
 }
 
@@ -86,4 +89,15 @@ function calculateBoxedScore(result?: LetterBoxedResult) {
   }
 }
 
-export { formatTime, calculateWordleScore, calculateConnectionsScore, calculateMiniScore, calculateBoxedScore }
+function calculateMiniScore(result?: MiniResult) {
+  switch (result) {
+    case MiniResult.Finished:
+      return 0;
+    case MiniResult.GaveUp:
+      return MINI_SCORE_FACTOR;
+    default:
+      return 0;
+  }
+}
+
+export { formatTime, calculateWordleScore, calculateConnectionsScore, calculateBoxedScore, calculateMiniScore }

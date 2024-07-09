@@ -43,7 +43,8 @@ const HomePage = () => {
   return (
     <Stack bgcolor={theme.palette.background.default} gap={3} alignItems="center">
       <Typography textAlign="center">
-        Play a marathon of <b>Wordle, Connections, The Mini and Letter Boxed</b> and try to get the best time
+        Play a marathon of <b>Wordle</b>, <b>Connections</b>, <b>Letter Boxed</b> and <b>The Mini</b> and try to get the
+        best time
       </Typography>
 
       <Stack mt={1} gap={1}>

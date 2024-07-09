@@ -16,12 +16,12 @@ const RulesModal = ({ open, onClose }: RulesModalProps) => {
             Wordle
           </Typography>
           <List>
-            <ListItem>Fail +3 min</ListItem>
-            <ListItem>in 5 guesses -20s</ListItem>
-            <ListItem>in 4 guesses -40s</ListItem>
-            <ListItem>in 3 guesses -1 min</ListItem>
-            <ListItem>in 2 guesses -2 min</ListItem>
-            <ListItem>in 1 guesses -3 min</ListItem>
+            <ListItem bullet="👍">in 1 guess -3 min</ListItem>
+            <ListItem bullet="👍">in 2 guesses -2 min</ListItem>
+            <ListItem bullet="👍">in 3 guesses -1 min</ListItem>
+            <ListItem bullet="👍">in 4 guesses -40s</ListItem>
+            <ListItem bullet="👍">in 5 guesses -20s</ListItem>
+            <ListItem bullet="🚫">Fail +3 min</ListItem>
           </List>
         </Stack>
 
@@ -30,16 +30,10 @@ const RulesModal = ({ open, onClose }: RulesModalProps) => {
             Connections
           </Typography>
           <List>
-            <ListItem>Each missing category +2 min</ListItem>
-          </List>
-        </Stack>
-
-        <Stack textAlign="center" gap={1}>
-          <Typography variant="h2">
-            The Mini
-          </Typography>
-          <List>
-            <ListItem>Give up/DNF +5 min</ListItem>
+            <ListItem bullet="👍">No mistakes -2 min</ListItem>
+            <ListItem bullet="👍">1 mistake -1 min 30s</ListItem>
+            <ListItem bullet="👍">2 mistakes -1 min</ListItem>
+            <ListItem bullet="🚫">Each missing category +2 min</ListItem>
           </List>
         </Stack>
 
@@ -48,8 +42,17 @@ const RulesModal = ({ open, onClose }: RulesModalProps) => {
             Letter Boxed
           </Typography>
           <List>
-            <ListItem>Win under the recommended amount -2 min</ListItem>
-            <ListItem>Win over the recommended amount +2 min</ListItem>
+            <ListItem bullet="👍">Win under the recommended amount -2 min</ListItem>
+            <ListItem bullet="🚫">Win over the recommended amount +2 min</ListItem>
+          </List>
+        </Stack>
+
+        <Stack textAlign="center" gap={1}>
+          <Typography variant="h2">
+            The Mini
+          </Typography>
+          <List>
+            <ListItem bullet="🚫">Give up/DNF +5 min</ListItem>
           </List>
         </Stack>
       </Stack>

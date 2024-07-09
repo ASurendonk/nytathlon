@@ -16,10 +16,11 @@ const List = ({ children }: ListProps) => {
 
 interface ListItemProps {
   children: React.ReactNode | string;
+  bullet?: string;
 }
 
-const ListItem = ({ children }: ListItemProps) => {
-  return (<Box textAlign="center" mt={`${SPACING}px`} lineHeight="normal">▪️ {children}</Box>);
+const ListItem = ({ children, bullet = "▪️" }: ListItemProps) => {
+  return (<Box textAlign="center" mt={`${SPACING}px`} lineHeight="normal">{bullet} {children}</Box>);
 }
 
 export { List, ListItem };

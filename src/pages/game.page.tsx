@@ -5,9 +5,8 @@ import MiniResult from "../enums/miniResult.enum.ts";
 import LetterBoxedResult from "../enums/letterBoxedResult.enum.ts";
 import Button from "../components/button.tsx";
 import Input from "../components/input.tsx";
-import Modal from "../components/modal.tsx";
-import { toast } from "react-toastify";
 import * as GameHelper from "../helpers/game.helper.ts";
+import ResultModal from "../components/modals/result.modal.tsx";
 
 const GamePage = () => {
   const theme = useTheme();
@@ -132,29 +131,6 @@ const GamePage = () => {
     }
   }, [boxed, resumeGame, setBoxed]);
 
-  const formatTimeResult = useCallback((time: number | undefined) => {
-    if (!time) {
-      return "0:00";
-    }
-    const minutes = Math.floor(Math.abs(time) / 60);
-    const remainingSeconds = Math.abs(time) % 60;
-    const formattedTime = `${time < 0 ? '-' : time > 0 ? '+' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-
-    let color = theme.palette.common.black;
-    if (time < 0) {
-      color = theme.palette.success.main;
-    } else if (time > 0) {
-      color = theme.palette.error.main;
-    }
-
-    return <Box component="span" sx={{ color, fontWeight: 700 }}>{formattedTime}</Box>;
-  }, [theme]);
-
-  const onShareResult = useCallback(() => {
-    navigator.clipboard.writeText(`I got ${GameHelper.formatTime(totalScore)} in the NYTathlon`);
-    toast.success("Result copied to clipboard");
-  }, [totalScore]);
-
   return (
     <Stack bgcolor={theme.palette.background.default} spacing={4}>
       <Box width={160} alignSelf="center">
@@ -213,18 +189,6 @@ const GamePage = () => {
 
       <Stack width="100%" gap={1.5}>
         <Typography variant="h5" component="div" sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 1 }}>
-          <Link href="https://www.nytimes.com/crosswords/game/mini" target="_blank">
-            The Mini
-          </Link>
-        </Typography>
-        <Box display="flex" sx={{ flexDirection: isMobile ? "column" : "row" }} gap={1}>
-          <Button label="Finished" selected={mini === MiniResult.Finished} onClick={onClickMini(MiniResult.Finished)} />
-          <Button label="Gave Up" selected={mini === MiniResult.GaveUp} onClick={onClickMini(MiniResult.GaveUp)} />
-        </Box>
-      </Stack>
-
-      <Stack width="100%" gap={1.5}>
-        <Typography variant="h5" component="div" sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 1 }}>
           <Link href="https://www.nytimes.com/puzzles/letter-boxed" target="_blank">
             Letter Boxed
           </Link>
@@ -236,34 +200,32 @@ const GamePage = () => {
         </Box>
       </Stack>
 
+      <Stack width="100%" gap={1.5}>
+        <Typography variant="h5" component="div" sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 1 }}>
+          <Link href="https://www.nytimes.com/crosswords/game/mini" target="_blank">
+            The Mini
+          </Link>
+        </Typography>
+        <Box display="flex" sx={{ flexDirection: isMobile ? "column" : "row" }} gap={1}>
+          <Button label="Finished" selected={mini === MiniResult.Finished} onClick={onClickMini(MiniResult.Finished)} />
+          <Button label="Gave Up" selected={mini === MiniResult.GaveUp} onClick={onClickMini(MiniResult.GaveUp)} />
+        </Box>
+      </Stack>
+
       {!playing && (
         <Button label="Show Result" onClick={() => setShowResult(true)} />
       )}
 
-      <Modal open={!playing && showResult} onClose={() => setShowResult(false)}>
-        <Stack textAlign="center" alignItems="center" gap={3} py={4}>
-          <Typography>Your time score</Typography>
-
-          <Box width={160} alignSelf="center" mt={-3}>
-            <Typography variant="h1" color={theme.palette.common.black} fontSize={64}>
-              {GameHelper.formatTime(totalScore)}
-            </Typography>
-          </Box>
-
-          <Stack gap={1}>
-            <Typography>Score breakdown</Typography>
-            <Typography>Raw time <b>{formattedTime}</b></Typography>
-            <Typography>Wordle {formatTimeResult(wordleScore)}</Typography>
-            <Typography>Connections {formatTimeResult(connectionsScore)}</Typography>
-            <Typography>The Mini {formatTimeResult(miniScore)}</Typography>
-            <Typography>Letter Boxed {formatTimeResult(boxedScore)}</Typography>
-          </Stack>
-
-          <Box mt={3}>
-            <Button label="Share Result" onClick={onShareResult} />
-          </Box>
-        </Stack>
-      </Modal>
+      <ResultModal
+        open={!playing && showResult}
+        onClose={() => setShowResult(false)}
+        rawTime={formattedTime}
+        totalScore={totalScore}
+        wordleScore={wordleScore}
+        connectionsScore={connectionsScore}
+        boxedScore={boxedScore}
+        miniScore={miniScore}
+      />
     </Stack>
   );
 };
