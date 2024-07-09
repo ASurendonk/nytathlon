@@ -61,7 +61,7 @@ const HomePage = () => {
         See penalties for each game
       </Link>
 
-      <Stack gap={2} flexDirection={isMobile ? "column" : "row" as "column" | "row"} alignSelf={isMobile ? "stretch" : ""}>
+      <Stack gap={1} flexDirection={isMobile ? "column" : "row" as "column" | "row"} alignSelf={isMobile ? "stretch" : ""}>
         {!!startTime && (
           <Button label="RESET TIME" onClick={onResetClick} />
         )}
