@@ -28,7 +28,7 @@ const Page: React.FC<PageProps> = ({ children }) => {
     >
       <AppBar position="static" elevation={0} sx={{ borderBottom: 1, borderColor: theme.palette.common.black, backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: "center" }}>
-          <ButtonBase sx={{ p: 1, m: -1 }} onClick={onClickLogo}>
+          <ButtonBase sx={{ p: 1, m: -1, borderRadius: "6px" }} onClick={onClickLogo}>
             <img src={Logo} alt="logo" height={40} style={{maxWidth: "100%"}}/>
           </ButtonBase>
         </Toolbar>
