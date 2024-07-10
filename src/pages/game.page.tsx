@@ -133,7 +133,7 @@ const GamePage = () => {
 
   return (
     <Stack bgcolor={theme.palette.background.default} spacing={4}>
-      <Box width={160} alignSelf="center">
+      <Box width={120} alignSelf="center">
         <Typography variant="h1" color={theme.palette.common.black} fontSize={64}>
           {formattedTime}
         </Typography>

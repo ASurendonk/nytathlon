@@ -78,11 +78,11 @@ const ResultModal = ({ open, onClose, rawTime, totalScore, ...scores }: ResultMo
 export default ResultModal;
 
 function calculateBubble(score: number) {
-  if (score > 0) {
+  if (score < 0) {
     return "🟩";
   } else if (score === 0) {
     return "⬜";
-  } else if (score < 0) {
+  } else if (score > 0) {
     return "🟥";
   } else {
     return "";
