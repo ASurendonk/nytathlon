@@ -19,8 +19,11 @@ interface ResultModalProps {
 const ResultModal = ({ open, onClose, rawTime, totalScore, ...scores }: ResultModalProps) => {
   const theme = useTheme();
 
-  const formatTimeResult = useCallback((time: number | undefined) => {
+  const formatTimeResult = useCallback((time: number | undefined, isMini?: boolean) => {
     if (!time) {
+      if (isMini) {
+        return <Box component="span" sx={{ color: theme.palette.success.main, fontWeight: 700 }}>0:00</Box>;
+      }
       return "0:00";
     }
     const minutes = Math.floor(Math.abs(time) / 60);
@@ -41,8 +44,7 @@ const ResultModal = ({ open, onClose, rawTime, totalScore, ...scores }: ResultMo
     const w = calculateBubble(scores.wordleScore);
     const c = calculateBubble(scores.connectionsScore);
     const lb = calculateBubble(scores.boxedScore);
-    const tm = calculateBubble(scores.miniScore);
-    console.log(w, c, lb, tm);
+    const tm = calculateMiniBubble(scores.miniScore);
     navigator.clipboard.writeText(`I got ${GameHelper.formatTime(totalScore)} in the NYTathlon\n${w} ${c} ${lb} ${tm}\nhttps://asurendonk.github.io/nytathlon/`);
     toast.success("Result copied to clipboard");
   }, [totalScore, scores]);
@@ -64,7 +66,7 @@ const ResultModal = ({ open, onClose, rawTime, totalScore, ...scores }: ResultMo
           <Typography>Wordle {formatTimeResult(scores.wordleScore)}</Typography>
           <Typography>Connections {formatTimeResult(scores.connectionsScore)}</Typography>
           <Typography>Letter Boxed {formatTimeResult(scores.boxedScore)}</Typography>
-          <Typography>The Mini {formatTimeResult(scores.miniScore)}</Typography>
+          <Typography>The Mini {formatTimeResult(scores.miniScore, true)}</Typography>
         </Stack>
 
         <Box mt={3}>
@@ -82,6 +84,16 @@ function calculateBubble(score: number) {
     return "🟩";
   } else if (score === 0) {
     return "⬜";
+  } else if (score > 0) {
+    return "🟥";
+  } else {
+    return "";
+  }
+}
+
+function calculateMiniBubble(score: number) {
+  if (score <= 0) {
+    return "🟩";
   } else if (score > 0) {
     return "🟥";
   } else {
