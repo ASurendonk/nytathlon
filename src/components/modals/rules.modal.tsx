@@ -43,7 +43,7 @@ const RulesModal = ({ open, onClose }: RulesModalProps) => {
           </Typography>
           <List>
             <ListItem bullet="👍">Win under the recommended amount -2 min</ListItem>
-            <ListItem bullet="🚫">Win over the recommended amount +2 min</ListItem>
+            <ListItem bullet="🚫">Win over the recommended amount/DNF +2 min</ListItem>
           </List>
         </Stack>
 

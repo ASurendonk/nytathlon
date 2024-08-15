@@ -6,9 +6,13 @@ const MINI_SCORE_FACTOR = 300;
 const LETTER_BOXED_SCORE_FACTOR = 120;
 
 function formatTime(time: number) {
-  const minutes = Math.floor(time / 60);
-  const remainingSeconds = time % 60;
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  const isNegative = time < 0;
+  const absoluteTime = Math.abs(time);
+
+  const minutes = Math.floor(absoluteTime / 60);
+  const remainingSeconds = absoluteTime % 60;
+
+  return `${isNegative ? '-' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
 
 function calculateWordleScore(result: string) {

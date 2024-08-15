@@ -194,9 +194,9 @@ const GamePage = () => {
           </Link>
         </Typography>
         <Box display="flex" sx={{ flexDirection: isMobile ? "column" : "row" }} gap={1}>
-          <Button label="Fewer Turns" selected={boxed === LetterBoxedResult.Fewer} onClick={onClickBoxed(LetterBoxedResult.Fewer)} />
+          <Button label="Under" selected={boxed === LetterBoxedResult.Fewer} onClick={onClickBoxed(LetterBoxedResult.Fewer)} />
           <Button label="On Par" selected={boxed === LetterBoxedResult.OnPar} onClick={onClickBoxed(LetterBoxedResult.OnPar)} />
-          <Button label="More Turns" selected={boxed === LetterBoxedResult.More} onClick={onClickBoxed(LetterBoxedResult.More)} />
+          <Button label="Over/DNF" selected={boxed === LetterBoxedResult.More} onClick={onClickBoxed(LetterBoxedResult.More)} />
         </Box>
       </Stack>
 
